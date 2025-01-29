@@ -17,7 +17,7 @@ function knightMoves(start, end) {
   while (queue.length > 0) {
     const [currentPos, path] = queue.shift();
 
-    if (currentPos[0] === end[0] && currentPos[1] === end[1]) {
+    if (currentPos.toString() === end.toString()) {
       return path;
     }
 
