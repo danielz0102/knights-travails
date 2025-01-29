@@ -15,23 +15,23 @@ function knightMoves(start, end) {
   visited.add(start.toString());
 
   while (queue.length > 0) {
-    const [currentPos, path] = queue.shift();
+    const [square, path] = queue.shift();
 
-    if (currentPos.toString() === end.toString()) {
+    if (square.toString() === end.toString()) {
       return path;
     }
 
     for (const [dx, dy] of MOVES) {
-      const newX = currentPos[0] + dx;
-      const newY = currentPos[1] + dy;
-      const newPos = [newX, newY];
-      const key = newPos.toString();
-      const isValid = newX >= 0 && newX < 8 && newY >= 0 && newY < 8;
+      const x = square[0] + dx;
+      const y = square[1] + dy;
+      const newSquare = [x, y];
+      const isValid = x >= 0 && x < 8 && y >= 0 && y < 8;
+      const key = newSquare.toString();
 
-      if (isValid && !visited.has(key)) {
-        visited.add(key);
-        queue.push([newPos, [...path, newPos]]);
-      }
+      if (!isValid || visited.has(key)) continue;
+
+      queue.push([newSquare, [...path, newSquare]]);
+      visited.add(key);
     }
   }
 
